@@ -1,15 +1,13 @@
-import React from 'react'
-import './App.css'
-import { ToastContainer } from 'react-toastify'
-import MotherRouting from './Components/Routing/MotherRouting'
+import React from "react";
+import "./App.css";
+import { ToastContainer } from "react-toastify";
+import MotherRouting from "./Components/Routing/MotherRouting";
 
 function App() {
-
-
   return (
-  <>
-  <MotherRouting/>
-  <ToastContainer
+    <>
+      <MotherRouting />
+      <ToastContainer
         position="top-right"
         autoClose={3000}
         hideProgressBar={false}
@@ -19,12 +17,12 @@ function App() {
         draggable
         theme="dark"
         toastStyle={{
-          background: 'rgba(0, 0, 0, 0.8)',
-          color: 'white',
+          background: "rgba(0, 0, 0, 0.8)",
+          color: "white",
         }}
       />
-  </>
-  )
+    </>
+  );
 }
 
-export default App
+export default App;

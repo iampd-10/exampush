@@ -1,26 +1,26 @@
-import { useState } from 'react';
-import axios from 'axios';
-import { FaUserPlus, FaSpinner } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useState } from "react";
+import axios from "axios";
+import { FaUserPlus, FaSpinner } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const REGISTER_URL = `http://localhost:8005/user/register`;
 
   const [formData, setFormData] = useState({
-    userName: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+    userName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -28,7 +28,7 @@ const Register = () => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      toast.error('Passwords do not match');
+      toast.error("Passwords do not match");
       return;
     }
 
@@ -38,27 +38,27 @@ const Register = () => {
       const payload = {
         userName: formData.userName,
         email: formData.email,
-        password: formData.password
+        password: formData.password,
       };
 
       const response = await axios.post(REGISTER_URL, payload, {
-        headers: { 'Content-Type': 'application/json' }
+        headers: { "Content-Type": "application/json" },
       });
 
-      toast.success(response?.data?.message || 'Registration successful!');
+      toast.success(response?.data?.message || "Registration successful!");
 
       setFormData({
-        userName: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
+        userName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
       });
     } catch (err) {
       const serverMessage = err?.response?.data?.message;
       const fallbackMessage =
         err?.response?.status === 409
-          ? 'Username or Email already exists'
-          : 'Registration Failed';
+          ? "Username or Email already exists"
+          : "Registration Failed";
 
       toast.error(serverMessage || fallbackMessage);
     } finally {
@@ -73,8 +73,11 @@ const Register = () => {
           Create your account
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
-          Already have an account?{' '}
-          <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="font-medium text-indigo-600 hover:text-indigo-500"
+          >
             Sign in
           </Link>
         </p>
@@ -84,7 +87,10 @@ const Register = () => {
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="userName" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="userName"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Username
               </label>
               <div className="mt-1">
@@ -102,7 +108,10 @@ const Register = () => {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Email address
               </label>
               <div className="mt-1">
@@ -120,7 +129,10 @@ const Register = () => {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Password
               </label>
               <div className="mt-1">
@@ -138,7 +150,10 @@ const Register = () => {
             </div>
 
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Confirm Password
               </label>
               <div className="mt-1">

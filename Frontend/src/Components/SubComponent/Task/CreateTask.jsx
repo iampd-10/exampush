@@ -12,7 +12,6 @@ const CreateTask = () => {
 
   const accessToken = localStorage.getItem("accessToken");
 
-
   const fetchTasks = async () => {
     try {
       const res = await axios.get("http://localhost:8005/task/getall", {
@@ -23,7 +22,7 @@ const CreateTask = () => {
 
       if (res.data.success) {
         setTasks(res.data.data);
-        localStorage.setItem("taskList", JSON.stringify(res.data.data)); 
+        localStorage.setItem("taskList", JSON.stringify(res.data.data));
       } else {
         toast.error(res.data.message || "Failed to fetch tasks");
       }
@@ -36,7 +35,6 @@ const CreateTask = () => {
   useEffect(() => {
     fetchTasks();
   }, []);
-
 
   const createTask = async (e) => {
     e.preventDefault();
@@ -59,7 +57,6 @@ const CreateTask = () => {
       if (res.data.success && res.data.data) {
         const createdTask = res.data.data;
 
-
         setTasks((prev) => {
           const updated = [...prev, createdTask];
           localStorage.setItem("taskList", JSON.stringify(updated));
@@ -80,15 +77,17 @@ const CreateTask = () => {
     }
   };
 
-
   const deleteTask = async (id) => {
     if (!window.confirm("Are you sure you want to delete this task?")) return;
     try {
-      const res = await axios.delete(`http://localhost:8005/task/delete/${id}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const res = await axios.delete(
+        `http://localhost:8005/task/delete/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
 
       if (res.data.success) {
         setTasks((prev) => {
@@ -109,7 +108,6 @@ const CreateTask = () => {
   return (
     <div className="max-w-2xl mx-auto p-6 bg-gray-900 text-white rounded-xl shadow-lg">
       <h2 className="text-2xl font-bold mb-4 text-center">Create Task</h2>
-
 
       <form onSubmit={createTask} className="space-y-3 mb-6">
         <input

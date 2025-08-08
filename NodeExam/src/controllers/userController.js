@@ -18,7 +18,6 @@ export const register = async (req, res) => {
       });
     }
 
-
     const existing = await userSchema.findOne({ email });
     if (existing) {
       return res.status(401).json({
@@ -38,7 +37,6 @@ export const register = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.secretKey, {
       expiresIn: "15m",
     });
-
 
     console.log(`Generated token: ${token}`);
     console.log(`User registered: ${userName}, Email: ${email}`);
@@ -62,7 +60,7 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-   
+
     const user = await userSchema.findOne({ email: email });
 
     if (!user) {
@@ -78,13 +76,11 @@ export const login = async (req, res) => {
           message: "Incorrect password",
         });
       }
-      
-       if (passwordCheck )
-           
-        {
+
+      if (passwordCheck) {
         //   await sessionSchema.findOneAndDelete({ userId: user._id });
         //   await sessionSchema.create({ userId: user._id });
-      
+
         const accessToken = jwt.sign(
           {
             id: user._id,
@@ -105,7 +101,6 @@ export const login = async (req, res) => {
           }
         );
 
-    
         await user.save();
         return res.status(200).json({
           success: true,
